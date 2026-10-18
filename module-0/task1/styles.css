@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #080808;
+    overflow: hidden;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-height: 100vh;
+    padding: 20px;
+
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.list .item {
+    flex: 0 1 130px;
+    min-width: 0;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: brightness(0);
+}
+
+.list .item img {
+    display: block;
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.list .item:hover {
+    transform: translateZ(200px);
+    filter: brightness(1);
+}
+
+.list .item:hover + * {
+    transform: translateZ(150px) rotateY(40deg);
+    filter: brightness(0.6);
+}
+
+.list .item:hover + * + * {
+    transform: translateZ(70px) rotateY(20deg);
+    filter: brightness(0.4);
+}
+
+.list .item:hover + * + * + * {
+    transform: translateZ(30px) rotateY(10deg);
+    filter: brightness(0.2);
+}
+
+.list .item:has(+ *:hover) {
+    transform: translateZ(150px) rotateY(-40deg);
+    filter: brightness(0.6);
+}
+
+.list .item:has(+ * + *:hover) {
+    transform: translateZ(70px) rotateY(-20deg);
+    filter: brightness(0.4);
+}
+
+.list .item:has(+ * + * + *:hover) {
+    transform: translateZ(30px) rotateY(-10deg);
+    filter: brightness(0.25);
+}
+
+@media (max-width: 900px) {
+    .list {
+        gap: 5px;
+    }
+
+    .list .item img {
+        height: 200px;
+    }
+}
